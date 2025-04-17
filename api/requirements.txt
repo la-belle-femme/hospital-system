@@ -1,0 +1,7 @@
+fastapi==0.75.0
+uvicorn==0.17.6
+psycopg2-binary==2.9.3
+python-jose==3.3.0
+passlib==1.7.4
+python-multipart==0.0.5
+jinja2==3.0.3

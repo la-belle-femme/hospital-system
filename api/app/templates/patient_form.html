@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ "Edit" if patient.patient_id else "Add New" }} Patient</h2>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="patient_name">Name:</label>
+        <input type="text" id="patient_name" name="patient_name" value="{{ patient.patient_name or '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" value="{{ patient.date_of_birth or '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="admission_date">Admission Date:</label>
+        <input type="date" id="admission_date" name="admission_date" value="{{ patient.admission_date or '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="diagnosis">Diagnosis:</label>
+        <textarea id="diagnosis" name="diagnosis" rows="3">{{ patient.diagnosis or '' }}</textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="attending_physician">Attending Physician:</label>
+        <input type="text" id="attending_physician" name="attending_physician" value="{{ patient.attending_physician or '' }}">
+    </div>
+    
+    <div class="form-group">
+        <label for="room_number">Room Number:</label>
+        <input type="text" id="room_number" name="room_number" value="{{ patient.room_number or '' }}">
+    </div>
+    
+    <div class="form-group checkbox-group">
+        <input type="checkbox" id="discharge_status" name="discharge_status" {% if patient.discharge_status %}checked{% endif %}>
+        <label for="discharge_status">Discharged</label>
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn">Save</button>
+        <a href="/web/patients" class="btn">Cancel</a>
+    </div>
+</form>
+{% endblock %}

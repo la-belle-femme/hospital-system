@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  database:
+    build: ./database
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=hospital_admin
+      - POSTGRES_PASSWORD=secure_password
+      - POSTGRES_DB=hospital_db
+    networks:
+      - hospital-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hospital_admin -d hospital_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./api
+    depends_on:
+      - database
+    environment:
+      - DB_HOST=database
+      - DB_NAME=hospital_db
+      - DB_USER=hospital_admin
+      - DB_PASSWORD=secure_password
+    networks:
+      - hospital-network
+    ports:
+      - "5000:5000"
+
+networks:
+  hospital-network:
+    driver: bridge
+
+volumes:
+  db-data:
