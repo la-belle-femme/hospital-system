@@ -20,7 +20,8 @@ services:
   api:
     build: ./api
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     environment:
       - DB_HOST=database
       - DB_NAME=hospital_db
