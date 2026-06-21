@@ -1,4 +1,4 @@
-FROM postgres:13
+FROM postgres:18.4
 
 # Set environment variables
 ENV POSTGRES_USER=hospital_admin
